@@ -1,0 +1,105 @@
+/* styles.css */
+
+/* Adjust the margin and padding of the content section */
+.content-section {
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Increase the bottom margin and padding of the form group */
+.form-group-form,
+.form-group-btn {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.form-group-btn {
+  text-align: center;
+}
+
+/* Adjust the border and padding of the legend element */
+.legend {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+}
+
+/* Adjust the color and border color of the sign-up button */
+.btn-outline-info {
+  width: 400px;
+  color: #fff;
+  border-color: #17a2b8;
+  background-color: #17a2b8;
+  padding: 12px 30px;
+  font-size: 22px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+/* Adjust the background color and text color on hover for the sign-up button */
+.btn-outline-info:hover {
+  background-color: #138496;
+}
+
+/* Increase the top margin and padding of the border-top section */
+.border-top {
+  margin-top: 30px;
+  padding-top: 20px;
+}
+
+/* Adjust the padding of the small text-muted element */
+.pt-3 {
+  padding-top: 20px;
+  text-align: center;
+}
+
+/* Add some margin to the left of the ml-2 class */
+.ml-2 {
+  margin-left: 4px;
+}
+
+/* Additional styles */
+.mb-4 {
+  text-align: center;
+}
+
+/* Increase the font size and font weight of the legend element */
+.legend {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* Adjust the color and font size of the small text-muted element */
+.text-muted {
+  color: #999;
+  font-size: 16px;
+}
+
+/* Add a subtle box-shadow to the sign-up button on hover */
+.btn-outline-info:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Add a border-radius to the form inputs */
+.content-section input[type="text"],
+.content-section input[type="email"],
+.content-section input[type="password"] {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+.content-section input[type="text"]:focus,
+.content-section input[type="email"]:focus,
+.content-section input[type="password"]:focus {
+  outline: none;
+  border-color: #17a2b8;
+  box-shadow: 0 0 5px rgba(23, 162, 184, 0.5);
+}

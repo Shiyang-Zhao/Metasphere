@@ -1,0 +1,123 @@
+/* profile.css */
+
+/* Media section styles */
+.media {
+    display: flex;
+    align-items: center;
+}
+
+.rounded-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.account-img {
+    margin-right: 20px;
+}
+
+.media-body {
+    flex: 1;
+}
+
+.account-heading {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.text-secondary {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Form section styles */
+.content-section {
+    margin-top: 40px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.btn-outline-info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.btn-outline-info:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+formlegend {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Additional styles */
+body {
+    background-color: #f8f9fa;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.alert {
+    margin-top: 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+    .account-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .account-heading {
+        font-size: 24px;
+    }
+
+    .text-secondary {
+        font-size: 14px;
+    }
+
+    legend {
+        font-size: 20px;
+    }
+}

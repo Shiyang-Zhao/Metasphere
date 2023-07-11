@@ -1,0 +1,25 @@
+/* logout.css */
+h2 {
+    margin-top: 60px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.border-top {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.text-muted a {
+    font-size: 20px;
+    color: #0055ff;
+    text-decoration: none;
+    transition: font-size 0.4s ease;
+}
+
+.text-muted a:hover {
+    text-decoration: underline;
+    font-size: 30px;
+}

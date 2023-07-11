@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'chat_rooms.css' %}">
+<div class="chat-room-detail">
+    <div class="left-column">
+        <div class="chat-rooms">
+            <h1>{{ user.username }}</h1>
+            <ul class="chat-room-list">
+                {% for chat_room in chat_rooms %}
+                <li class="chat-room-item">
+                    <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title"
+                        data-url="{% url 'chat-room-detail' pk=chat_room.pk %}">
+                        {% for member in chat_room.members.all %}
+                        {% if member != request.user %}
+                        {{ member }}
+                        {% endif %}
+                        {% endfor %}
+                    </a>
+                    <form action="{% url 'chat-room-delete' pk=chat_room.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+                {% empty %}
+                <li>No chat rooms available.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

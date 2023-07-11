@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Don't change the position of the parts with comments related to comments and replies -->
+<div class="jumbotron mt-3 shadow-lg">
+  <article class="media content-section shadow">
+    <div class="media-body">
+      <div class="d-flex justify-content-start align-items-center">
+        <a href="{% url 'profile' post.author.username  %} ">
+          <img src="{{ post.author.profile.image.url }}" alt=""
+            class="article-img rounded-circle img-thumbnail img-fluid">
+        </a>
+        <div class="mr-2 mt-0 mb-0 text-dark">
+          <a href="{% url 'user-posts' post.author.username %}">
+            <h4>{{ post.author }}</h4>
+          </a>
+          <small class="text-muted text-align-right">{{ post.date_posted }}</small>
+        </div>
+      </div>
+      <h2>{{ post.title }}</h2>
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="article-content">{{ post.content }}</p>
+        <div class="form-group mt-0 pt-0 d-flex justify-content-end">
+          {% if post.author == user %}
+          <div class="form-group mt-0 pt-0 d-flex justify-content-end">
+            <a class="btn btn-danger btn-sm mt-1 mb-1 flex-last delete-button"
+              href="{% url 'post-delete' post.pk %}">Delete</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1 flex-last update-button"
+              href="{% url 'post-update' post.pk %}">Update</a>
+          </div>
+          {% endif %}
+          {% if post.file %}
+          <a href="{{ post.file.url }}" download class="btn btn-primary flex-last download-button" type="submit">
+            <i class="fas fa-download"></i> Downlaod
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr>
+      <div>
+        {% if post.file %}
+        {% if post.extension == '.jpg' or post.extension == '.jpeg' or post.extension == '.png' %}
+        <a href="{{ post.file.url }}" download>
+          <img src="{{ post.file.url }}" alt="" class="img-fluid" title="Click to downlaod">
+        </a>
+        {% elif post.extension == '.mp4' %}
+        <div class="embed-responsive embed-responsive-16by9">
+          <video id="video-1_html_api" class="vjs-tech" preload="auto" autoplay loop>
+            <source src="{{ post.file.url }}" type="video/mp4" class="embed-responsive">
+          </video>
+        </div>
+        {% else %}
+        <a href="{{ post.file.url }}" download class="text-primary">
+          <h5>{{ post.file|cut:"Files/" }}</h5>
+        </a>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </article>
+
+  <!-- Comment and Reply Form -->
+  <div class="comments mt-4">
+    <h4>Comments</h4>
+    {% for comment in comments %}
+    <div class="media mt-3">
+      <div class="media-body ml-3 comments-replies">
+        <div class="comment-header" title="Click to reply">
+          <a href="{% url 'profile' comment.author.username  %} " class="img-Link"> <img class="profile-img"
+              src="{{ comment.author.profile.image.url }}  " alt=""
+              class="article-img rounded-circle img-thumbnail img-fluid">
+          </a>
+          <a href="{% url 'user-posts' comment.author.username  %}" class="author-Link">{{ comment.author }}</a>
+          <small class="text-muted">{{ comment.date_posted }}</small>
+          <p class="comment-content">{{ comment.content }}</p>
+          <a href="" class="reply-link">Reply</a>
+          {% if comment.author == user %}
+          <a href="" class="update-link">Edit</a>
+          {% endif %}
+        </div>
+
+        <!-- Replies to the top comment -->
+        <div class="reply-form mt-3 ml-4">
+          <form method="POST" action="{% url 'comment-reply' pk=post.pk comment_pk=comment.pk %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <textarea class="form-control" name="content" rows="2" placeholder="Write your reply"></textarea>
+            </div>
+            <input type="hidden" name="parent_comment_pk" value="{{ comment.pk }}">
+            <button type="submit" class="btn btn-primary post-reply">Reply</button>
+          </form>
+        </div>
+
+        <!-- Update the replies -->
+        {% if comment.author == user %}
+        <div class="update-form mt-3 ml-4">
+          <form method="POST" action="{% url 'comment-update' pk=post.pk comment_pk=comment.pk %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <textarea class="form-control" name="content" rows="2">{{ comment.content }}</textarea>
+            </div>
+            <input type="hidden" name="comment_pk" value="{{ comment.pk }}">
+            <button type="submit" class="btn btn-primary post-update">Update</button>
+          </form>
+        </div>
+        {% endif %}
+
+        {% include 'nested_replies.html' with replies=comment.replies %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <!-- New comment form -->
+    {% if user.is_authenticated %}
+    <div class="mt-4">
+      <h6>Leave a Comment as <a href="{% url 'profile' user %}">{{ user.username }}</a></h6>
+      <form id="comment-form" method="POST" action="{% url 'comment-create' post.pk %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <textarea class="form-control" name="content" rows="3" placeholder="Write your comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary post-comment">Post Comment</button>
+      </form>
+    </div>
+    {% else %}
+    <p class="mt-4">You need to <a href="{% url 'login' %}">login</a> to leave a comment.</p>
+    {% endif %}
+  </div>
+  {% endblock content %}

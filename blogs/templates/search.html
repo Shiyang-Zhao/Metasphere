@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for post in posts %}
+<div>
+    <span> {{ post.created }} </span>
+    <a href="{% url 'post_detail' pk=post.pk %}">
+        <h2 class="page-title">{{ post.title }}</h2>
+    </a>
+    <div class="post">
+        {{ post.body|safe }}
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% if replies %}
+{% for reply in replies.all %}
+<!-- Don't change the position of the parts with comments related to comments and replies -->
+<div class="comments-replies mt-4">
+    <div class="media mt-3">
+        <div class="comment-header media-body ml-3" title="Click to reply">
+            <a href="{% url 'profile' reply.author.username  %} " class="img-Link"> <img class="profile-img"
+                    src="{{ reply.author.profile.image.url }}  " alt=""
+                    class="article-img rounded-circle img-thumbnail img-fluid">
+            </a>
+            <a href="{% url 'user-posts' reply.author.username  %}" class="author-Link">{{ reply.author }}</a>
+            <small class="text-muted">{{ reply.date_posted }}</small>
+            <p class="comment-content">{{ reply.content }}</p>
+            <a href="" class="reply-link">Reply</a>
+            {% if reply.author == user %}
+            <a href="" class="update-link">Edit</a>
+            {% endif%}
+        </div>
+
+        <!-- Replies to the top comment -->
+        <div class="reply-form mt-3 ml-4">
+            <form method="POST" action="{% url 'comment-reply' pk=post.pk comment_pk=reply.pk %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" name="content" rows="2" placeholder="Write your reply"></textarea>
+                </div>
+                <input type="hidden" name="parent_comment_pk" value="{{ reply.pk }}">
+                <button type="submit" class="btn btn-primary post-reply">Reply</button>
+            </form>
+        </div>
+
+        <!-- Update the replies -->
+        {% if reply.author == user %}
+        <div class="update-form mt-3 ml-4">
+            <form method="POST" action="{% url 'comment-update' pk=post.pk comment_pk=reply.pk %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" name="content" rows="2">{{ reply.content }}</textarea>
+                </div>
+                <input type="hidden" name="comment_pk" value="{{ reply.pk }}">
+                <button type="submit" class="btn btn-primary post-update">Update</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <!-- Recursive rendering of nested replies -->
+        {% include 'nested_replies.html' with replies=reply.replies %}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
