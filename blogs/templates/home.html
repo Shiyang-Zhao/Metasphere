@@ -3,7 +3,7 @@
 {% for post in posts %}
 <div class="jumbotron mt-3 bg-white shadow-lg">
   <article class="media content-section shadow">
-    <a href="{% url 'profile' post.author.username  %} ">
+    <a href="{% url 'profile' post.author.username  %}">
       <img src="{{ post.author.profile.image.url }}  " alt=""
         class="article-img rounded-circle img-thumbnail img-fluid shadow">
     </a>

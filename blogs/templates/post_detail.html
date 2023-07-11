@@ -113,7 +113,7 @@
     <!-- New comment form -->
     {% if user.is_authenticated %}
     <div class="mt-4">
-      <h6>Leave a Comment as <a href="{% url 'profile' user %}">{{ user.username }}</a></h6>
+      <h6>Leave a Comment as <a href="{% url 'profile' request.user.username %}">{{ request.user.username }}</a></h6>
       <form id="comment-form" method="POST" action="{% url 'comment-create' post.pk %}">
         {% csrf_token %}
         <div class="form-group">

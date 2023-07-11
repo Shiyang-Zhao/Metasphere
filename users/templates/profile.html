@@ -28,13 +28,12 @@
   {% else %}
   <!-- Button section for non-owners -->
   <div class="button-section">
-    <!-- <a href="{% url 'chat-room-create' %}" class="btn btn-primary">Send Message</a> -->
     <form action="{% url 'chat-room-create' %}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="receiver_id" value="{{ user.pk }}">
       <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
-    <a class="btn btn-primary">Follow</a>
+    <a href="{% url 'add_friend' username=user.username %}" class="btn btn-primary">Follow</a>
   </div>
   {% endif %}
 </div>

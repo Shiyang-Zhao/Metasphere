@@ -5,7 +5,7 @@
 <div class="chat-room-detail">
     <div class="left-column">
         <div class="chat-rooms">
-            <h1>{{ user.username }}</h1>
+            <h1>{{ request.user.username }}</h1>
             <ul class="chat-room-list">
                 {% for chat_room in chat_rooms %}
                 <li class="chat-room-item">

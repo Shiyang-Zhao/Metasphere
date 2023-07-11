@@ -53,3 +53,17 @@ def profile(request, username):
     }
 
     return render(request, 'profile.html', context)
+
+
+@login_required
+def add_friend(request, username):
+    if request.method == 'POST':
+        friend = get_object_or_404(User, username=username)
+        profile = request.user.profile
+        # Add the friend's profile to the user's friend list
+        profile.friends.add(friend.profile)
+        profile.save()
+        messages.success(
+            request, f"You have added {friend.username} as a friend!")
+
+    return redirect('profile', username=friend.username)

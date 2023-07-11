@@ -35,6 +35,7 @@
 
 /* Form section styles */
 .content-section {
+    min-width: 600px;
     margin-top: 40px;
 }
 
@@ -60,11 +61,12 @@
     border-color: #17a2b8;
 }
 
-formlegend {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
+.button-section {
+    display: inline-flex;
+}
+
+.button-section button {
+    margin-right: 20px;
 }
 
 /* Additional styles */
