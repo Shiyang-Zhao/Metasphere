@@ -34,12 +34,12 @@ socket.onmessage = (event) => {
 
     if (message.sender === senderUsername) {
         container.className = 'sender-container';
-        img.className = 'sender-img article-img img-thumbnail img-fluid shadow';
+        img.className = 'sender-img img-thumbnail img-fluid shadow';
         img.src = senderImgUrl;
         messageItem.className = 'message-item sender-message';
     } else {
         container.className = 'receiver-container';
-        img.className = 'receiver-img article-img img-thumbnail img-fluid shadow';
+        img.className = 'receiver-img img-thumbnail img-fluid shadow';
         img.src = receiverImgUrl;
         messageItem.className = 'message-item receiver-message';
     }

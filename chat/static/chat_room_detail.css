@@ -1,6 +1,7 @@
 /* Chat Room Detail Container */
 .chat-room-detail {
     min-width: 650px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     background-color: #ffffff;

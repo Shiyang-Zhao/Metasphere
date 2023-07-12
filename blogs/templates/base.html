@@ -20,41 +20,54 @@
 <body>
   <div class="background-container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand font-weight-bold" href="{% url 'blog-home' %}"><i class="fas fa-home"></i>
-        Metasphere</a>
+      <a class="navbar-brand font-weight-bold" href="{% url 'blog-home' %}"><i class="fas fa-home"></i> Metasphere</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!------{{ request.get_host }}/blog/search/-->
-        <div class="navbar-nav ms-auto">
-          <form id="searchform" action="{% url 'search' %}" method="get">
-            <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search Here..." />
-            <button type="button" onclick="searchform.submit()" class=" text-white my-color btn-primary">
-              <i class="fa fa-search"></i></button>
-          </form>
-        </div>
-        {% if user.is_authenticated %}
-        <a href="{% url 'chat-room-list' %}" class="btn text-white m-2"><i class="fas fa-comments"></i> Chat</a>
-        <a href="{% url 'user-posts' request.user.username %}" class="btn text-white m-2">
-          <i class="fas fa-user-shield"></i> My Post</a>
-        <a href="{% url 'post-create' %}" class="btn text-white m-2"><i class="fas fa-user-edit"></i> New Post</a>
-        <a href="{% url 'profile' request.user.username %}" class="btn text-white m-2">
-          <i class="fas fa-user"></i>
-          {{ request.user.username }}
-        </a>
-        <a href="{% url 'logout' %}" class="btn text-white m-2"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-
-        {% else %}
-        <a href="{% url 'login' %} " class="btn text-white m-2"><i class="fas fa-user-tie"></i> Log In</a>
-
-        <a href="{% url 'register' %} " class="btn text-white m-2"> <i class="fas fa-sign-in-alt"></i> Sign Up</a>
-        {% endif %}
-
+      <div class="collapse navbar-collapse flex-row" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto flex-row align-items-center">
+          <li class="nav-item d-flex">
+            <form id="searchform" action="{% url 'search' %}" method="get" class="d-flex">
+              <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search Here..."
+                class="form-control me-1" />
+              <button type="button" onclick="searchform.submit()" class="btn text-white my-color btn-primary">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href="{% url 'chat-room-list' %}" class="btn text-white m-1"><i class="fas fa-comments"></i> Chat</a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="btn text-white m-1"><i class="fas fa-comments"></i> My Friends</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'post-create' %}" class="btn text-white m-1"><i class="fas fa-user-edit"></i> New Post</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'profile' request.user.username %}" class="btn text-white m-1">
+              <i class="fas fa-user"></i>
+              {{ request.user.username }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'logout' %}" class="btn text-white m-1"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'login' %} " class="btn text-white m-1"><i class="fas fa-user-tie"></i> Log In</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'register' %} " class="btn text-white m-1"> <i class="fas fa-sign-in-alt"></i> Sign Up</a>
+          </li>
+          {% endif %}
+        </ul>
       </div>
     </nav>
+
     <div class="container my-bg">
       {% if messages %}
       {% for message in messages %}

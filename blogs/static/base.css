@@ -27,6 +27,22 @@ ul {
   margin: 0;
 }
 
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  transform: translateY(-2px);
+}
+
+img,
+video {
+  max-width: 80%;
+  max-height: 80%;
+}
+
 .bg-steel {
   background-color: #5f788a;
 }
@@ -44,6 +60,8 @@ ul {
 }
 
 .content-section {
+  min-width: 600px;
+  margin-top: 20px;
   margin-bottom: 20px;
   background: #ffffff;
   padding: 10px 20px;
@@ -52,60 +70,12 @@ ul {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.page-nav {
-  margin-top: 20px;
-}
-
-.article-title {
-  color: #444444;
-}
-
-.article-title:hover {
-  color: #428bca;
-}
-
-.article-content {
-  white-space: pre-line;
-}
-
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-}
-
-.article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #000000;
-}
-
-.article-metadata a:hover {
-  color: #333;
-}
-
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
-}
-
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
-}
-
-.account-heading {
-  font-size: 2.5rem;
-}
-
 /* Add a box shadow to the navbar */
 .navbar {
-  padding: 5px 20px;
+  display: flex;
+  padding: 5px 10px;
   background-color: transparent !important;
-  transition: background-color ease 0.5s;
+  transition: all ease 0.5s;
 }
 
 .navbar:hover {
@@ -115,7 +85,7 @@ ul {
 .navbar-brand {
   font-size: 2rem;
   font-family: Helvetica;
-  transition: font-size ease 0.4s;
+  transition: all ease 0.4s;
 }
 
 .navbar-brand:hover {
@@ -123,15 +93,15 @@ ul {
 }
 
 /* Style the search input field */
-#searchform input[type="text"] {
+#searchform input {
   background-color: rgba(255, 255, 255, 0.8);
   border: none;
   padding: 8px 15px;
   border-radius: 20px;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
-#searchform input[type="text"]:focus {
+#searchform input:focus {
   background-color: rgba(255, 255, 255, 1);
 }
 
@@ -144,98 +114,13 @@ ul {
   border-radius: 20px;
   font-size: 16px;
   color: #ffffff;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 #searchform button:hover {
   background-color: #138496;
   border-color: #138496;
 }
-
-/* Add a hover effect to buttons */
-.home,
-.btn {
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
-  transform: translateY(-2px);
-}
-
-.download-button,
-.update-button,
-.delete-button {
-  margin-right: 10px;
-}
-
-.home:hover {
-  transform: translateY(-2px);
-}
-
-.page-nav {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.page-item {
-  display: inline;
-  margin: 0 5px;
-}
-
-img,
-video {
-  max-width: 80%;
-  max-height: 80%;
-}
-
-/* Comment and reply */
-.comments {
-  background-color: #ffffff;
-  padding: 20px 20px;
-}
-
-.comments-replies {
-  margin: 0 20px;
-}
-
-.comment-header {
-  padding: 0 10px;
-  margin-top: -10px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.comment-header:hover {
-  background-color: #acacac;
-  transform: translateY(-2px);
-}
-
-.comment-content {
-  margin-bottom: 0px;
-}
-
-.profile-img {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-}
-
-.update-form,
-.reply-form {
-  display: none;
-}
-
-.post-comment,
-.post-reply,
-.post-update {
-  margin-top: 10px;
-}
-
-/* base.css */
 
 /* Add the CSS class for the fade-in and scale effect */
 .fade-in-scale {

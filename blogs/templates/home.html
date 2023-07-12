@@ -1,16 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
 {% for post in posts %}
 <article class="media content-section shadow">
-  <a href="{% url 'profile' post.author.username  %}">
-    <img src="{{ post.author.profile.image.url }}  " alt=""
-      class="article-img rounded-circle img-thumbnail img-fluid shadow">
-  </a>
-  <div class="media-body">
-    <div class="article-metadata">
-      <a class="mr-2 " href="{% url 'user-posts' post.author.username  %}">{{ post.author }}</a>
-      <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+  <div class="d-flex justify-content-start align-items-center">
+    <a href="{% url 'profile' post.author.username  %} ">
+      <img src="{{ post.author.profile.image.url }}" alt="" class="article-img rounded-circle img-thumbnail img-fluid">
+    </a>
+    <div class="mr-2 mt-0 mb-0 text-dark">
+      <a href="{% url 'profile' post.author.username %}" class="author-link">
+        <h4>{{ post.author }}</h4>
+      </a>
+      <small class="text-muted text-align-right">{{ post.date_posted }}</small>
     </div>
+  </div>
+  <hr>
+  <div class="media-body">
     <h2><a class="article-title text-justify " href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
     <div class="d-flex justify-content-between">
       <p class="article-content text-justify text-truncate overflow-hidden">{{ post.content }}</p>

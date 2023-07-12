@@ -34,11 +34,6 @@
 }
 
 /* Form section styles */
-.content-section {
-    min-width: 600px;
-    margin-top: 40px;
-}
-
 .form-group {
     margin-bottom: 30px;
 }
@@ -104,6 +99,12 @@ p {
     background-color: #d4edda;
     color: #155724;
     border-color: #c3e6cb;
+}
+
+.user-posts {
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /* Responsive styles */

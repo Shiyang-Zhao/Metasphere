@@ -4,11 +4,11 @@
 <div class="comments-replies mt-4">
     <div class="media mt-3">
         <div class="comment-header media-body ml-3" title="Click to reply">
-            <a href="{% url 'profile' reply.author.username  %} " class="img-Link"> <img class="profile-img"
+            <a href="{% url 'profile' reply.author.username  %} " class="img-link"> <img class="profile-img"
                     src="{{ reply.author.profile.image.url }}  " alt=""
                     class="article-img rounded-circle img-thumbnail img-fluid">
             </a>
-            <a href="{% url 'user-posts' reply.author.username  %}" class="author-Link">{{ reply.author }}</a>
+            <a href="{% url 'profile' reply.author.username %}" class="author-link">{{ reply.author }}</a>
             <small class="text-muted">{{ reply.date_posted }}</small>
             <p class="comment-content">{{ reply.content }}</p>
             <a href="" class="reply-link">Reply</a>

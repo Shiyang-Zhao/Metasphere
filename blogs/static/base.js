@@ -19,8 +19,8 @@ window.onload = fadeInAndScalePage;
 const commentHeader = document.querySelectorAll('.comment-header');
 const replyLinks = document.querySelectorAll('.reply-link');
 const updateLinks = document.querySelectorAll('.update-link');
-const imgLinks = document.querySelectorAll('.img-Link');
-const authorLinks = document.querySelectorAll('.author-Link');
+const imgLinks = document.querySelectorAll('.img-link');
+const authorLinks = document.querySelectorAll('.author-link');
 
 commentHeader.forEach(function (header) {
    header.addEventListener('click', function (event) {

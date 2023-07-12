@@ -40,5 +40,29 @@
     {% endif %}
   </div>
   {% endif %}
+  <hr>
+  <div class="user-posts">
+    {% for post in posts %}
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="d-flex justify-content-start align-items-center">
+          <a href="{% url 'profile' post.author.username %}">
+            <img src="{{ post.author.profile.image.url }}" alt=""
+              class="article-img rounded-circle img-thumbnail img-fluid">
+          </a>
+          <div class="mr-2 mt-0 mb-0 text-dark">
+            <h4>{{ post.author }}</h4>
+
+            <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+          </div>
+        </div>
+        <h2><a class="article-title" href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="article-content">{{ post.content }}</p>
+        </div>
+    </article>
+    {% endfor %}
+  </div>
+
 </div>
 {% endblock content %}

@@ -1,0 +1,68 @@
+h2 {
+    margin: -10px 0 -5px 0;
+}
+
+.article-content {
+    white-space: pre-line;
+}
+
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+
+/* Comment and reply */
+.comments {
+    background-color: #ffffff;
+    padding: 20px 20px;
+}
+
+.comments-replies {
+    margin: 0 20px;
+}
+
+.comment-header {
+    padding: 0 10px;
+    margin-top: -10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.comment-header:hover {
+    background-color: #acacac;
+    transform: translateY(-2px);
+}
+
+.comment-content {
+    margin-bottom: 0px;
+}
+
+.profile-img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+.update-form,
+.reply-form {
+    display: none;
+}
+
+.post-comment,
+.post-reply,
+.post-update {
+    margin-top: 10px;
+}
+
+.author-link {
+    color: #222;
+}
+
+.download-button,
+.update-button,
+.delete-button {
+    margin-right: 10px;
+}

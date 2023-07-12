@@ -1,0 +1,41 @@
+h2 {
+    margin: -10px 0 -5px 0;
+}
+
+.article-title {
+    color: #444444;
+}
+
+.article-title:hover {
+    color: #428bca;
+}
+
+.article-content {
+    white-space: pre-line;
+}
+
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #000000;
+}
+
+.article-metadata a:hover {
+    color: #333;
+}
+
+.page-nav {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.page-item {
+    display: inline;
+    margin: 0 5px;
+}

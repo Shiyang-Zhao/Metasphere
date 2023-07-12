@@ -6,14 +6,14 @@ from .views import (
     PostCreateView,
     PostUpdateView,
     PostDeleteView,
-    UserPostListView
+    #     UserPostListView
 )
 from . import views
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
-    path('user/<str:username>/posts',
-         UserPostListView.as_view(), name='user-posts'),
+    #     path('user/<str:username>/posts',
+    #          UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/<int:pk>/comment/create',
          CommentView.as_view(), name='comment-create'),

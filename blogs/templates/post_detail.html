@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <!-- Don't change the position of the parts with comments related to comments and replies -->
+<link rel="stylesheet" href="{% static 'post_detail.css' %}">
 <div class="jumbotron mt-3 shadow-lg">
   <article class="media content-section shadow">
     <div class="media-body">
@@ -10,12 +12,13 @@
             class="article-img rounded-circle img-thumbnail img-fluid">
         </a>
         <div class="mr-2 mt-0 mb-0 text-dark">
-          <a href="{% url 'user-posts' post.author.username %}">
+          <a href="{% url 'profile' post.author.username %}" class="author-link">
             <h4>{{ post.author }}</h4>
           </a>
           <small class="text-muted text-align-right">{{ post.date_posted }}</small>
         </div>
       </div>
+      <hr>
       <h2>{{ post.title }}</h2>
       <div class="d-flex justify-content-between align-items-center">
         <p class="article-content">{{ post.content }}</p>
@@ -66,11 +69,11 @@
     <div class="media mt-3">
       <div class="media-body ml-3 comments-replies">
         <div class="comment-header" title="Click to reply">
-          <a href="{% url 'profile' comment.author.username  %} " class="img-Link"> <img class="profile-img"
+          <a href="{% url 'profile' comment.author.username  %} " class="img-link"> <img class="profile-img"
               src="{{ comment.author.profile.image.url }}  " alt=""
               class="article-img rounded-circle img-thumbnail img-fluid">
           </a>
-          <a href="{% url 'user-posts' comment.author.username  %}" class="author-Link">{{ comment.author }}</a>
+          <a href="{% url 'profile' comment.author.username  %}" class="author-link">{{ comment.author }}</a>
           <small class="text-muted">{{ comment.date_posted }}</small>
           <p class="comment-content">{{ comment.content }}</p>
           <a href="" class="reply-link">Reply</a>

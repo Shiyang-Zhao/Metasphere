@@ -1,5 +1,6 @@
 .chat-rooms {
     min-height: 650px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     background-color: #f7f7f7;
