@@ -10,7 +10,8 @@ from PIL import Image
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    friends = models.ManyToManyField('self', symmetrical=True, blank=True)
+    following = models.ManyToManyField(
+        'self', symmetrical=False, blank=True, related_name='followers')
     last_activity = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

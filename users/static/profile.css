@@ -65,7 +65,9 @@
     display: inline-flex;
 }
 
-.button-section button {
+.send-message,
+.following,
+.follow {
     margin-right: 20px;
 }
 

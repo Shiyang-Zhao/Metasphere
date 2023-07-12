@@ -128,7 +128,7 @@ ul {
   border: none;
   padding: 8px 15px;
   border-radius: 20px;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
 }
 
 #searchform input[type="text"]:focus {

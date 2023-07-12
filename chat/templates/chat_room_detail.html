@@ -1,32 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'chat_rooms.css' %}">
 <link rel="stylesheet" href="{% static 'chat_room_detail.css' %}">
 <div class="chat-room-detail">
     <div class="left-column">
-        <div class="chat-rooms">
-            <ul class="chat-room-list">
-                {% for chat_room in chat_rooms %}
-                <li class="chat-room-item">
-                    <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title">
-                        {% for member in chat_room.members.all %}
-                        {% if member != user %}
-                        <img src="{{ member.profile.image.url }}">
-                        {{ member }}
-                        {% endif %}
-                        {% endfor %}
-                    </a>
-                    <form action="{% url 'chat-room-delete' pk=chat_room.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit">Delete</button>
-                    </form>
-                </li>
-                {% empty %}
-                <li>No chat rooms available.</li>
-                {% endfor %}
-            </ul>
-        </div>
+        <!-- <h2>{{ request.user.username }}</h2> -->
+        <ul class="chat-room-list">
+            {% for chat_room in chat_rooms %}
+            <li class="chat-room-item">
+                <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title"
+                    data-url="{% url 'chat-room-detail' pk=chat_room.pk %}">
+                    {% for member in chat_room.members.all %}
+                    {% if member != request.user %}
+                    <img src="{{ member.profile.image.url }}" class="member-img">
+                    {{ member }}
+                    {% endif %}
+                    {% endfor %}
+                </a>
+                <!-- <form action="{% url 'chat-room-delete' pk=chat_room.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form> -->
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 
     <div class="right-column">
@@ -38,7 +35,7 @@
                 {% if message.sender == user %}
                 <div class="sender-container">
                     <a href="{% url 'profile' message.sender.username  %} ">
-                        <img class="sender-img article-img img-thumbnail img-fluid shadow"
+                        <img class="sender-img img-thumbnail img-fluid shadow"
                             src="{{ message.sender.profile.image.url }}">
                     </a>
                     <li class="message-item sender-message">{{ message.message }}</li>
@@ -46,7 +43,7 @@
                 {% else %}
                 <div class="receiver-container">
                     <a href="{% url 'profile' message.sender.username  %} ">
-                        <img class="receiver-img article-img img-thumbnail img-fluid shadow"
+                        <img class="receiver-img img-thumbnail img-fluid shadow"
                             src="{{ message.sender.profile.image.url }}">
                     </a>
                     <li class="message-item receiver-message">{{ message.message }}</li>

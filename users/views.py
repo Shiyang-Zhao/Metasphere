@@ -56,14 +56,19 @@ def profile(request, username):
 
 
 @login_required
-def add_friend(request, username):
-    if request.method == 'POST':
-        friend = get_object_or_404(User, username=username)
-        profile = request.user.profile
-        # Add the friend's profile to the user's friend list
-        profile.friends.add(friend.profile)
-        profile.save()
+def manage_friend(request, username):
+    friend = get_object_or_404(User, username=username)
+    profile = request.user.profile
+
+    if profile.following.filter(user=friend).exists():
+        # Friend already exists, remove them
+        profile.following.remove(friend.profile)
         messages.success(
-            request, f"You have added {friend.username} as a friend!")
+            request, f"You have removed {friend.username} as a friend.")
+    else:
+        # Friend doesn't exist, add them
+        profile.following.add(friend.profile)
+        messages.success(
+            request, f"You have added {friend.username} as a friend.")
 
     return redirect('profile', username=friend.username)

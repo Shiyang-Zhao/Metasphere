@@ -31,9 +31,13 @@
     <form action="{% url 'chat-room-create' %}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="receiver_id" value="{{ user.pk }}">
-      <button type="submit" class="btn btn-primary">Send Message</button>
+      <button type="submit" class="btn btn-primary send-message">Send Message</button>
     </form>
-    <a href="{% url 'add_friend' username=user.username %}" class="btn btn-primary">Follow</a>
+    {% if user.profile in request.user.profile.following.all %}
+    <a href="{% url 'manage_friend' username=user.username %}" class="btn btn-secondary following">Following</a>
+    {% else %}
+    <a href="{% url 'manage_friend' username=user.username %}" class="btn btn-primary follow">Follow</a>
+    {% endif %}
   </div>
   {% endif %}
 </div>
