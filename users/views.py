@@ -25,33 +25,23 @@ def register(request):
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    posts = Post.objects.filter(author=user)
-    is_self = False
-
-    if request.user == user:
-        is_self = True
-
-        if request.method == 'POST':
-            u_form = UserUpdateForm(request.POST, instance=request.user)
-            p_form = ProfileUpdateForm(
-                request.POST, request.FILES, instance=request.user.profile)
-            if u_form.is_valid() and p_form.is_valid():
-                u_form.save()
-                p_form.save()
-                messages.success(request, 'Your account has been updated!')
-                return redirect('profile', username=username)
-        else:
-            u_form = UserUpdateForm(instance=user)
-            p_form = ProfileUpdateForm(instance=user.profile)
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, 'Your account has been updated!')
+            return redirect('profile', username=username)
     else:
-        u_form = None
-        p_form = None
+        u_form = UserUpdateForm(instance=user)
+        p_form = ProfileUpdateForm(instance=user.profile)
+
     context = {
         'user': user,
-        'posts': posts,
         'u_form': u_form,
-        'p_form': p_form,
-        'is_self': is_self,
+        'p_form': p_form
     }
 
     return render(request, 'profile.html', context)

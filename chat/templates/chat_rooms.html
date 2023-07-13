@@ -3,16 +3,35 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'chat_rooms.css' %}">
 <div class="chat-rooms">
-    <div class="left-column">
+
+    <div class="left-column fade-out">
+        <h5>Following</h5>
+        <ul class="friend-list">
+            {% for friend in request.user.profile.following.all %}
+            <li class="friend-item">
+                <div class="friend-title">
+                    <input type="checkbox" id="{{ friend.user.username }}" class="friend-checkbox" name="friends[]"
+                        value="{{ friend.user.username }}">
+                    <label class="d-flex align-items-center" for="{{ friend.user.username }}">
+                        <img src="{{ friend.image.url }}" class="friend-img">
+                        <text>{{ friend.user.username }}</text>
+                    </label>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="middle-column">
+        <h5>Chat</h5>
         <ul class="chat-room-list">
-            {% for chat_room in chat_rooms %}
+            {% for chat_room in request.user.chat_rooms.all %}
             <li class="chat-room-item">
-                <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title"
-                    data-url="{% url 'chat-room-detail' pk=chat_room.pk %}">
+                <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title">
                     {% for member in chat_room.members.all %}
                     {% if member != request.user %}
                     <img src="{{ member.profile.image.url }}" class="member-img">
-                    {{ member }}
+                    <text>{{ member.username }}</text>
                     {% endif %}
                     {% endfor %}
                 </a>
@@ -29,9 +48,13 @@
         <i class="fa-sharp fa-solid fa-paper-plane fa-bounce"></i>
         <h1>Your Messages</h1>
         <h3>Share your posts in the community</h3>
-        <button class="btn btn-secondary">Create Group Chat</button>
-        <button class="btn">Send to All</button>
-    </div>
+        <div class="d-flex mt-2">
+            <button type="submit" class="btn btn-primary me-2 create-group-chat">Create Group Chat</button>
+            <button type="submit" class="btn btn-primary me-2 create">Create</button>
+            <a class="btn btn-secondary me-2">Send to All</a>
+        </div>
 
+    </div>
 </div>
+<script src="{% static 'chat_rooms.js' %}"></script>
 {% endblock %}

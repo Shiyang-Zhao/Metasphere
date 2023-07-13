@@ -6,14 +6,13 @@
     <div class="left-column">
         <!-- <h2>{{ request.user.username }}</h2> -->
         <ul class="chat-room-list">
-            {% for chat_room in chat_rooms %}
+            {% for chat_room in request.user.chat_rooms.all %}
             <li class="chat-room-item">
-                <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title"
-                    data-url="{% url 'chat-room-detail' pk=chat_room.pk %}">
+                <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title">
                     {% for member in chat_room.members.all %}
                     {% if member != request.user %}
                     <img src="{{ member.profile.image.url }}" class="member-img">
-                    {{ member }}
+                    <text>{{ member.username }}</text>
                     {% endif %}
                     {% endfor %}
                 </a>
@@ -65,5 +64,5 @@
         </div>
     </div>
 </div>
-<script src="{% static 'chat.js' %}"></script>
+<script src="{% static 'chat_room_detail.js' %}"></script>
 {% endblock %}

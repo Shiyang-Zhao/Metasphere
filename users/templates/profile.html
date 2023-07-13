@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  {% if is_self %}
+  {% if request.user == user %}
   <!-- Form section for updating profile -->
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -28,9 +28,10 @@
   {% else %}
   <!-- Button section for non-owners -->
   <div class="button-section">
-    <form action="{% url 'chat-room-create' %}" method="POST">
+    <form action="{% url 'direct-message-create' %}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="receiver_id" value="{{ user.pk }}">
+      <input type="hidden" name="is_direct_message" value="True">
       <button type="submit" class="btn btn-primary send-message">Send Message</button>
     </form>
     {% if user.profile in request.user.profile.following.all %}
@@ -42,7 +43,7 @@
   {% endif %}
   <hr>
   <div class="user-posts">
-    {% for post in posts %}
+    {% for post in user.post_set.all %}
     <article class="media content-section">
       <div class="media-body">
         <div class="d-flex justify-content-start align-items-center">

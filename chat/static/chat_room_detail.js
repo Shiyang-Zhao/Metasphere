@@ -4,12 +4,11 @@ const messageInput = document.querySelector('.message-send-input');
 const sendButton = document.querySelector('.message-send-button');
 
 const socketProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-
 const socketURL = socketProtocol + window.location.host + '/ws/chat_room/' + chatRoomName.getAttribute("data-pk") + '/';
-
 
 // Create a new WebSocket connection
 const socket = new WebSocket(socketURL);
+// Get sender and receiver
 const senderId = sendButton.getAttribute('data-sender-pk');
 const senderUsername = sendButton.getAttribute('data-sender-username');
 const senderImgUrl = sendButton.getAttribute('data-sender-img')
@@ -17,6 +16,7 @@ const senderImgUrl = sendButton.getAttribute('data-sender-img')
 const receiverId = sendButton.getAttribute('data-receiver-pk');
 const receiverUsername = sendButton.getAttribute('data-receiver-username');
 const receiverImgUrl = sendButton.getAttribute('data-receiver-img')
+
 
 // WebSocket event listeners
 socket.onopen = () => {
@@ -73,4 +73,3 @@ function sendMessage(messageText) {
     socket.send(JSON.stringify(message));
     messageInput.value = ''; // Clear the input field
 }
-

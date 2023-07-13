@@ -12,6 +12,10 @@ h2 {
     margin-right: 16px;
 }
 
+.author-link {
+    color: #222;
+}
+
 /* Comment and reply */
 .comments {
     background-color: #ffffff;
@@ -55,10 +59,6 @@ h2 {
 .post-reply,
 .post-update {
     margin-top: 10px;
-}
-
-.author-link {
-    color: #222;
 }
 
 .download-button,

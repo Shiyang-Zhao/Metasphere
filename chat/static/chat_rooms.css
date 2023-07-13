@@ -1,4 +1,5 @@
 .chat-rooms {
+    min-width: 800px;
     min-height: 650px;
     margin-top: 20px;
     display: flex;
@@ -7,7 +8,8 @@
     border-radius: 5px;
 }
 
-.left-column {
+.left-column,
+.middle-column {
     width: 200px;
     border-radius: 5px 0 0 5px;
     background-color: #f7f7f7;
@@ -15,6 +17,18 @@
     overflow-x: hidden;
 }
 
+.left-column {
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.left-column h5,
+.middle-column h5 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.friend-list,
 .chat-room-list {
     list-style: none;
     padding: 0;
@@ -24,15 +38,27 @@
     text-align: center;
 }
 
+.friend-item,
 .chat-room-item {
-    padding: 15px 40px 15px 40px;
+    padding: 10px 30px 10px 30px;
 }
 
+.friend-item label:hover{
+    cursor: pointer;
+}
+
+.friend-item input {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+.friend-item:hover,
 .chat-room-item:hover {
     cursor: pointer;
     background-color: #dbdbdb;
 }
 
+.friend-img,
 .member-img {
     width: 40px;
     height: 40px;
@@ -40,6 +66,7 @@
     margin-right: 5px;
 }
 
+.friend-title,
 .chat-room-title {
     font-size: 18px;
     display: flex;
@@ -72,3 +99,72 @@
 .right-column h3 {
     opacity: 0.6;
 }
+
+.create {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+.left-column.fade-in {
+    animation: fadeInLeft 0.3s ease forwards;
+}
+
+.left-column.fade-out {
+    width: 0;
+    animation: fadeOutLeft 0.3s ease forwards;
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.zoom-in {
+    animation: zoomIn 0.3s forwards;
+}
+
+.zoom-out {
+    animation: zoomOut 0.3s forwards;
+}
+

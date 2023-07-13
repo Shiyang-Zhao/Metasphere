@@ -34,8 +34,6 @@ class ChatRoomDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chat_rooms'] = ChatRoom.objects.filter(
-            members=self.request.user)
         # Add the logged-in user to the context
         context['sender'] = get_object_or_404(Profile, user=self.request.user)
         chat_room = self.get_object()
@@ -54,6 +52,7 @@ class ChatRoomCreateView(LoginRequiredMixin, CreateView):
         sender = self.request.user
         receiver = get_object_or_404(
             User, pk=self.request.POST.get('receiver_id'))
+        is_direct_message = self.request.POST.get('is_direct_message')
         existing_chat_room = ChatRoom.objects.filter(
             members=sender).filter(members=receiver).filter(
                 is_direct_message=True).first()
@@ -63,7 +62,7 @@ class ChatRoomCreateView(LoginRequiredMixin, CreateView):
         else:
             chat_room = form.save(commit=False)
             chat_room.name = receiver.username
-            chat_room.is_direct_message = True
+            chat_room.is_direct_message = is_direct_message
             chat_room.save()
             chat_room.members.add(sender, receiver)
 

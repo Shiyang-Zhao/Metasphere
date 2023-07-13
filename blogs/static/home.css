@@ -2,6 +2,10 @@ h2 {
     margin: -10px 0 -5px 0;
 }
 
+.author-link {
+    color: #222;
+}
+
 .article-title {
     color: #444444;
 }
