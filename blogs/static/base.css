@@ -127,7 +127,7 @@ video {
   opacity: 0;
   transform: scale(0.8);
   /* Initial scale value, change as per your preference */
-  animation: fadeInScaleAnimation 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+  animation: fadeInScaleAnimation 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
 }
 
 /* Define the keyframes for the fade-in and scale animation */
@@ -145,5 +145,26 @@ video {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* Add the CSS class for the slide-in effect */
+.slide-in {
+  opacity: 0;
+  transform: translateY(-100%);
+  /* Initial translation value, change as per your preference */
+  animation: slideInAnimation 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+}
+
+/* Define the keyframes for the slide-in animation */
+@keyframes slideInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

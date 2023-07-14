@@ -35,8 +35,8 @@ class ChatRoomDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Add the logged-in user to the context
-        context['sender'] = get_object_or_404(Profile, user=self.request.user)
         chat_room = self.get_object()
+        context['sender'] = get_object_or_404(Profile, user=self.request.user)
         receiver = chat_room.members.exclude(
             username=self.request.user.username).first()
         context['receiver'] = get_object_or_404(Profile, user=receiver)
@@ -48,23 +48,43 @@ class ChatRoomCreateView(LoginRequiredMixin, CreateView):
     fields = []
 
     def form_valid(self, form):
-
+        is_direct_message = self.request.POST.get(
+            'is_direct_message') == 'True'
         sender = self.request.user
-        receiver = get_object_or_404(
-            User, pk=self.request.POST.get('receiver_id'))
-        is_direct_message = self.request.POST.get('is_direct_message')
-        existing_chat_room = ChatRoom.objects.filter(
-            members=sender).filter(members=receiver).filter(
-                is_direct_message=True).first()
+        if is_direct_message:
+            # Handle direct message creation
+            receiver = get_object_or_404(
+                User, pk=self.request.POST.get('receiver_id'))
+            members = [sender, receiver]
+            existing_chat_room = sender.chat_rooms.filter(members=sender).filter(
+                members=receiver, is_direct_message=True).first()
 
-        if existing_chat_room:
-            chat_room = existing_chat_room
+            if existing_chat_room:
+                chat_room = existing_chat_room
+            else:
+                chat_room = form.save()
+                chat_room.name = receiver.username
+                chat_room.is_direct_message = is_direct_message
+                chat_room.members.set(members)
+                chat_room.save()
         else:
-            chat_room = form.save(commit=False)
-            chat_room.name = receiver.username
+            # Handle group chat creation
+            receiver_ids = [int(id) for id in self.request.POST.get(
+                'receiver_ids').split(',')]
+            receivers = User.objects.filter(pk__in=receiver_ids)
+            members = [sender] + list(receivers)
+            existing_chat_rooms = sender.chat_rooms.filter(
+                members__in=members, is_direct_message=False)
+
+            for existing_chat_room in existing_chat_rooms:
+                if set(existing_chat_room.members.all()) == set(members):
+                    return redirect('chat-room-detail', pk=existing_chat_room.pk)
+
+            chat_room = form.save()
             chat_room.is_direct_message = is_direct_message
+            chat_room.name = f"Group {chat_room.pk}"
+            chat_room.members.set(members)
             chat_room.save()
-            chat_room.members.add(sender, receiver)
 
         return redirect('chat-room-detail', pk=chat_room.pk)
 

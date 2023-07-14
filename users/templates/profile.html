@@ -30,8 +30,8 @@
   <div class="button-section">
     <form action="{% url 'direct-message-create' %}" method="POST">
       {% csrf_token %}
-      <input type="hidden" name="receiver_id" value="{{ user.pk }}">
       <input type="hidden" name="is_direct_message" value="True">
+      <input type="hidden" name="receiver_id" value="{{ user.pk }}">
       <button type="submit" class="btn btn-primary send-message">Send Message</button>
     </form>
     {% if user.profile in request.user.profile.following.all %}

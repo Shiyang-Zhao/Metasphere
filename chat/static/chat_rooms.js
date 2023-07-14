@@ -29,3 +29,11 @@ checkboxes.forEach((checkbox) => {
         }
     });
 });
+
+function getCheckedFirends() {
+    const checkedBoxes = document.querySelectorAll('.friend-checkbox:checked');
+    const receiverIds = Array.from(checkedBoxes).map(function (checkbox) {
+        return checkbox.value;
+    }).join(',');
+    document.querySelector('.receiver-ids-input').value = receiverIds;
+}

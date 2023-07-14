@@ -9,6 +9,7 @@ function fadeInAndScalePage() {
    if (container) {
       // Add a CSS class to apply the fade-in and scale effect
       container.classList.add('fade-in-scale');
+      // container.classList.add('slide-in');
    }
 }
 
