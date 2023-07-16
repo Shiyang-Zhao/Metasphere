@@ -42,7 +42,15 @@
             <a href="{% url 'chat-room-list' %}" class="btn text-white m-1"><i class="fas fa-comments"></i> Chat</a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'chat-room-list' %}" class="btn text-white m-1"><i class="fas fa-user-friends"></i> My Friends</a>
+            {% if user.chat_rooms.first %}
+            <a href="{% url 'chat-room-detail' user.chat_rooms.first.pk %}" class="btn text-white m-1">
+              <i class="fas fa-user-friends"></i> My Friends
+            </a>
+            {% else %}
+            <a href="{% url 'chat-room-list' %}" class="btn text-white m-1">
+              <i class="fas fa-user-friends"></i> My Friends
+            </a>
+            {% endif %}
           </li>
           <li class="nav-item">
             <a href="{% url 'post-create' %}" class="btn text-white m-1"><i class="fas fa-user-edit"></i> New Post</a>

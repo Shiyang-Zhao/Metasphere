@@ -1,4 +1,7 @@
 /* profile.css */
+.content-section {
+    margin-top: -15px;
+}
 
 /* Media section styles */
 .media {
@@ -6,38 +9,14 @@
     align-items: center;
 }
 
-.rounded-circle {
+.account-img {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.account-img {
     margin-right: 20px;
-}
-
-.media-body {
-    flex: 1;
-}
-
-.account-heading {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.text-secondary {
-    font-size: 16px;
-    color: #777;
+    transition: all 0.3s ease;
 }
 
 /* Form section styles */
-.form-group {
-    margin-bottom: 30px;
-}
-
 .border-bottom {
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
@@ -58,7 +37,7 @@
 
 .button-section {
     margin-top: 10px;
-    display: inline-flex;
+    display: flex;
 }
 
 .send-message,
@@ -68,9 +47,39 @@
 }
 
 .user-posts {
-    max-height: 400px;
+    max-height: 800px;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.user-post {
+    min-width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    grid-row: span 1;
+    word-wrap: break-word;
+    background: linear-gradient(to bottom, #F8F8F8, #B2DFDB, #B2CCFF);
+    cursor: pointer;
+}
+
+.image-post,
+.video-post {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: fill;
+}
+
+.text-post {
+    text-align: center;
 }
 
 /* Responsive styles */
@@ -78,17 +87,5 @@
     .account-img {
         width: 100px;
         height: 100px;
-    }
-
-    .account-heading {
-        font-size: 24px;
-    }
-
-    .text-secondary {
-        font-size: 14px;
-    }
-
-    legend {
-        font-size: 20px;
     }
 }

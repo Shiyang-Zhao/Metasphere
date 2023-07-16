@@ -2,34 +2,38 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'home.css' %}">
-{% for post in posts %}
-<article class="media content-section shadow">
-  <div class="d-flex justify-content-start align-items-center">
-    <a href="{% url 'profile' post.author.username  %} ">
-      <img src="{{ post.author.profile.image.url }}" alt="" class="article-img rounded-circle img-thumbnail img-fluid">
-    </a>
-    <div class="mr-2 mt-0 mb-0 text-dark">
-      <a href="{% url 'profile' post.author.username %}" class="author-link">
-        <h4>{{ post.author }}</h4>
+<div class="content-container">
+  {% for post in posts %}
+  <article class="media content-section shadow">
+    <div class="d-flex justify-content-start align-items-center">
+      <a href="{% url 'profile' post.author.username  %} ">
+        <img src="{{ post.author.profile.image.url }}" alt=""
+          class="article-img rounded-circle img-thumbnail img-fluid">
       </a>
-      <small class="text-muted text-align-right">{{ post.date_posted }}</small>
-    </div>
-  </div>
-  <hr>
-  <div class="media-body">
-    <h2><a class="article-title text-justify " href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
-    <div class="d-flex justify-content-between">
-      <p class="article-content text-justify text-truncate overflow-hidden">{{ post.content }}</p>
-      {% if post.file %}
-      <div class="form-group mt-0 pt-0  m-2">
-        <a class="btn btn-outline-primary  btn-d " href="{{ post.file.url }}" download type="submit"><i
-            class="fas fa-download"></i></a>
+      <div class="mr-2 mt-0 mb-0 text-dark">
+        <a href="{% url 'profile' post.author.username %}" class="author-link">
+          <h4>{{ post.author }}</h4>
+        </a>
+        <small class="text-muted text-align-right">{{ post.date_posted }}</small>
       </div>
-      {% endif %}
     </div>
-  </div>
-</article>
-{% endfor %}
+    <hr>
+    <div class="media-body">
+      <h2><a class="article-title text-justify " href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
+      <div class="d-flex justify-content-between">
+        <p class="article-content text-justify text-truncate overflow-hidden">{{ post.content }}</p>
+        {% if post.file %}
+        <div class="form-group mt-0 pt-0  m-2">
+          <a class="btn btn-outline-primary  btn-d " href="{{ post.file.url }}" download type="submit"><i
+              class="fas fa-download"></i></a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+
 <div class="page-nav">
   {% if is_paginated %}
 

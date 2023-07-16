@@ -2,8 +2,8 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 0;
-  background-image: url('background.jpg');
-  background-size: contain;
+  background-image: url('/media/background.jpg');
+  background-size: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -11,7 +11,7 @@ body {
 
 .background-container {
   min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
   padding-bottom: 40px;
 }
 
@@ -59,9 +59,14 @@ video {
   font-weight: 500;
 }
 
+.container {
+  opacity: 0.95;
+  transform: scale(0.85);
+  transition: all 0.3s ease;
+}
+
 .content-section {
-  min-width: 600px;
-  margin-top: 20px;
+  min-width: 650px;
   margin-bottom: 20px;
   background: #ffffff;
   padding: 10px 20px;

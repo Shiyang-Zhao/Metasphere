@@ -1,7 +1,7 @@
 .chat-rooms {
-    min-width: 800px;
-    min-height: 650px;
-    margin-top: 20px;
+    min-width: 650px;
+    min-height: 600px;
+    margin-top: -20px;
     display: flex;
     justify-content: space-between;
     background-color: #f7f7f7;
@@ -40,11 +40,10 @@
 
 .friend-item,
 .chat-room-item {
-    padding: 10px 30px 10px 30px;
-}
-
-.friend-item label:hover{
-    cursor: pointer;
+    display: flex;
+    padding: 10px 25px;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .friend-item input {
@@ -59,7 +58,7 @@
 }
 
 .friend-img,
-.member-img {
+.chatroom-img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -69,10 +68,6 @@
 .friend-title,
 .chat-room-title {
     font-size: 18px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #333;
 }
 
 /* Right Column */
@@ -143,6 +138,7 @@
         opacity: 0;
         transform: scale(0);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -154,6 +150,7 @@
         opacity: 1;
         transform: scale(1);
     }
+
     100% {
         opacity: 0;
         transform: scale(0);
@@ -167,4 +164,3 @@
 .zoom-out {
     animation: zoomOut 0.3s forwards;
 }
-

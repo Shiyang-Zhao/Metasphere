@@ -36,4 +36,12 @@ function getCheckedFirends() {
         return checkbox.value;
     }).join(',');
     document.querySelector('.receiver-ids-input').value = receiverIds;
+    checkedBoxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+    });
+}
+
+function toggleCheckbox(checkboxId) {
+    var checkbox = document.getElementById(checkboxId);
+    checkbox.checked = !checkbox.checked;
 }

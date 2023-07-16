@@ -73,3 +73,16 @@ function sendMessage(messageText) {
     socket.send(JSON.stringify(message));
     messageInput.value = ''; // Clear the input field
 }
+
+// Display Following list
+const friendsLink = document.querySelector('.friends-link');
+const leftColumn = document.querySelector('.left-column');
+
+friendsLink.addEventListener('click', () => {
+    leftColumn.classList.toggle('fade-in');
+    leftColumn.classList.toggle('fade-out');
+})
+
+function goToProfile(element) {
+    window.location.href = element.querySelector("a").getAttribute("href");
+}

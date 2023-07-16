@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section pt-2 mt-3 shadow-lg">
+<link rel="stylesheet" href="{% static 'post_form.css' %}">
+<div class="content-section pt-2 shadow-lg">
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -14,6 +16,5 @@
             <button class="btn btn-outline-primary" type="submit"><i class="fas fa-upload"></i> Upload</button>
         </div>
     </form>
-
 </div>
 {% endblock content %}

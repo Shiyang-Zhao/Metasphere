@@ -3,7 +3,7 @@
 {% block content %}
 <!-- Don't change the position of the parts with comments related to comments and replies -->
 <link rel="stylesheet" href="{% static 'post_detail.css' %}">
-<div class="jumbotron mt-3 shadow-lg">
+<div class="jumbotron shadow-lg">
   <article class="media content-section shadow">
     <div class="media-body">
       <div class="d-flex justify-content-start align-items-center">
@@ -42,16 +42,28 @@
       <hr>
       <div>
         {% if post.file %}
-        {% if post.extension == '.jpg' or post.extension == '.jpeg' or post.extension == '.png' %}
-        <a href="{{ post.file.url }}" download>
+        {% if post.extension == '.jpg' or post.extension == '.jpeg' or post.extension == '.png' or post.extension == '.gif' or post.extension == '.webp' %}
+        <a href="{{ post.file.url }}" target="_blank">
           <img src="{{ post.file.url }}" alt="" class="img-fluid" title="Click to downlaod">
         </a>
-        {% elif post.extension == '.mp4' %}
+        {% elif post.extension == '.mp4' or post.extension == '.mov' or post.extension == '.avi' or post.extension == '.wmv' or post.extension == '.webm' %}
         <div class="embed-responsive embed-responsive-16by9">
-          <video id="video-1_html_api" class="vjs-tech" preload="auto" autoplay loop>
+          <video id="video-1_html_api" class="vjs-tech" preload="auto" autoplay loop muted controls>
             <source src="{{ post.file.url }}" type="video/mp4" class="embed-responsive">
           </video>
         </div>
+        {% elif post.extension == '.pdf' %}
+        <a href="{{ post.file.url }}" class="text-primary" target="_blank">
+          <h5>{{ post.file|cut:"Files/" }}</h5>
+        </a>
+        {% elif post.extension == '.docx' or post.extension == '.doc' %}
+        <a href="https://docs.google.com/viewer?url={{ post.file.url }}" class="text-primary" target="_blank">
+          <h5>{{ post.file|cut:"Files/" }}</h5>
+        </a>
+        {% elif post.extension == '.xls' %}
+        <a href="https://sheets.google.com/viewer?url={{ post.file.url }}" class="text-primary" target="_blank">
+          <h5>{{ post.file|cut:"Files/" }}</h5>
+        </a>
         {% else %}
         <a href="{{ post.file.url }}" download class="text-primary">
           <h5>{{ post.file|cut:"Files/" }}</h5>

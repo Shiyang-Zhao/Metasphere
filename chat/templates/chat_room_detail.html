@@ -3,13 +3,33 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'chat_room_detail.css' %}">
 <div class="chat-room-detail">
-    <div class="left-column">
-        <!-- <h2>{{ request.user.username }}</h2> -->
+
+    <div class="left-column fade-out">
+        <h5>Following</h5>
+        <ul class="friend-list">
+            {% for friend in request.user.profile.following.all %}
+            <li class="friend-item" onclick="goToProfile(this)">
+                <div class="friend-title">
+                    <label for="{{ friend.user.pk }}">
+                        <a class="d-flex align-items-center" href="{% url 'profile' friend.user.username %}">
+                            <img src="{{ friend.image.url }}" class="friend-img">
+                            <text class="text-dark">{{ friend.user.username }}</text>
+                        </a>
+                    </label>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="middle-column">
+        <h5>Chat</h5>
         <ul class="chat-room-list">
             {% for chat_room in request.user.chat_rooms.all %}
             <li class="chat-room-item">
-                <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title">
-                    <text>{{ chat_room.name }}</text>
+                <a href="{% url 'chat-room-detail' chat_room.pk %}" class="chat-room-title d-flex align-items-center">
+                    <img class="chatroom-img" src="{{ chat_room.image.url }}"></img>
+                    <text class="text-dark">{{ chat_room.name }}</text>
                 </a>
                 <!-- <form action="{% url 'chat-room-delete' pk=chat_room.pk %}" method="POST">
                     {% csrf_token %}
@@ -22,7 +42,10 @@
 
     <div class="right-column">
         <div class="top-right">
-            <h2 class="chat-room-name" data-pk="{{ chat_room.pk }}">{{ chat_room.name }}</h2>
+            <div class="d-flex">
+                <h4 class="chat-room-name" data-pk="{{ chat_room.pk }}">{{ chat_room.name }}</h4>
+                <a class="friends-link">Friends</a>
+            </div>
             <hr>
             <ul class="message-list">
                 {% for message in chat_room.messages.all %}

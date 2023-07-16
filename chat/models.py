@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class ChatRoom(models.Model):
     name = models.CharField(max_length=100)
+    image = models.ImageField(default='default_chatroom.jpg', upload_to='chatroom_pics')
     members = models.ManyToManyField(User, related_name='chat_rooms')
     is_direct_message = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

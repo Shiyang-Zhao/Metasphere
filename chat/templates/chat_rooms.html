@@ -8,13 +8,13 @@
         <h5>Following</h5>
         <ul class="friend-list">
             {% for friend in request.user.profile.following.all %}
-            <li class="friend-item">
-                <div class="friend-title">
+            <li class="friend-item" onclick="toggleCheckbox('{{ friend.user.pk }}')">
+                <div class="friend-title d-flex align-items-center">
                     <input type="checkbox" id="{{ friend.user.pk }}" class="friend-checkbox" name="friends[]"
                         value="{{ friend.user.pk }}">
                     <label class="d-flex align-items-center" for="{{ friend.user.pk }}">
                         <img src="{{ friend.image.url }}" class="friend-img">
-                        <text>{{ friend.user.username }}</text>
+                        <text class="text-dark">{{ friend.user.username }}</text>
                     </label>
                 </div>
             </li>
@@ -27,8 +27,9 @@
         <ul class="chat-room-list">
             {% for chat_room in request.user.chat_rooms.all %}
             <li class="chat-room-item">
-                <a href="{% url 'chat-room-detail' pk=chat_room.pk %}" class="chat-room-title">
-                    <text>{{ chat_room.name }}</text>
+                <a href="{% url 'chat-room-detail' chat_room.pk %}" class="chat-room-title d-flex align-items-center">
+                    <img class="chatroom-img" src="{{ chat_room.image.url }}"></img>
+                    <text class="text-dark">{{ chat_room.name }}</text>
                 </a>
                 <!-- <form action="{% url 'chat-room-delete' pk=chat_room.pk %}" method="POST">
                     {% csrf_token %}

@@ -64,6 +64,7 @@ class ChatRoomCreateView(LoginRequiredMixin, CreateView):
             else:
                 chat_room = form.save()
                 chat_room.name = receiver.username
+                chat_room.image = receiver.profile.image
                 chat_room.is_direct_message = is_direct_message
                 chat_room.members.set(members)
                 chat_room.save()

@@ -1,8 +1,8 @@
 /* Chat Room Detail Container */
 .chat-room-detail {
     min-width: 650px;
-    min-height: 650px;
-    margin-top: 20px;
+    min-height: 600px;
+    margin-top: -20px;
     display: flex;
     justify-content: space-between;
     background-color: #ffffff;
@@ -11,7 +11,8 @@
 }
 
 /* Left Column */
-.left-column {
+.left-column,
+.middle-column {
     width: 250px;
     border-radius: 5px 0 0 5px;
     background-color: #f7f7f7;
@@ -19,6 +20,18 @@
     overflow-x: hidden;
 }
 
+.left-column {
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.left-column h5,
+.middle-column h5 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.friend-list,
 .chat-room-list {
     list-style: none;
     padding: 0;
@@ -28,20 +41,40 @@
     text-align: center;
 }
 
+.friend-item,
 .chat-room-item {
-    padding: 15px 40px 15px 40px;
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: flex-start;
 }
 
+.friend-item label:hover {
+    cursor: pointer;
+}
+
+.friend-item input {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+.friend-item:hover,
 .chat-room-item:hover {
     cursor: pointer;
     background-color: #dbdbdb;
 }
 
-.member-img {
+.friend-img,
+.chatroom-img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 5px;
+}
+
+.friend-title,
+.chat-room-title {
+    font-size: 18px;
 }
 
 .chat-room-title {
@@ -60,13 +93,19 @@
     flex-direction: column;
 }
 
+.friends-link {
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
 /* Message */
 .top-right {
     flex-grow: 1;
 }
 
 .chat-room-name {
-    font-size: 28px;
     font-weight: bold;
     margin-left: 15px;
 }
@@ -153,3 +192,35 @@
     transform: scaleY(1.1);
 }
 
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+.left-column.fade-in {
+    animation: fadeInLeft 0.3s ease forwards;
+}
+
+.left-column.fade-out {
+    width: 0;
+    animation: fadeOutLeft 0.3s ease forwards;
+}
