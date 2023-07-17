@@ -11,7 +11,7 @@ const socket = new WebSocket(socketURL);
 // Get sender and receiver
 const senderId = sendButton.getAttribute('data-sender-pk');
 const senderUsername = sendButton.getAttribute('data-sender-username');
-const senderImgUrl = sendButton.getAttribute('data-sender-img')
+const senderImgUrl = sendButton.getAttribute('data-sender-img');
 
 const receiverId = sendButton.getAttribute('data-receiver-pk');
 const receiverUsername = sendButton.getAttribute('data-receiver-username');

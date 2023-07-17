@@ -14,19 +14,17 @@
 
   {% if request.user == user %}
   <!-- Form section for updating profile -->
-  <div id="overlay" class="overlay">
-    <div class="profile-update-form fade-out">
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-          {{ u_form|crispy }}
-          {{ p_form|crispy }}
-        </fieldset>
-        <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>
-        </div>
-      </form>
-    </div>
+  <div class="profile-update-form fade-out">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+      </div>
+    </form>
   </div>
 
   <button class="btn btn-primary edit-profile-btn">Edit</button>
@@ -53,12 +51,12 @@
   <div class="user-posts">
     <div class="posts-container">
       {% for post in user.post_set.all %}
-      <article class="user-post mx-1 my-1" data-url="{% url 'post-detail' post.pk %}">
+      <article class="user-post mx-1 my-1 lazy" data-url="{% url 'post-detail' post.pk %}">
         {% if post.file %}
         {% if post.extension == '.jpg' or post.extension == '.jpeg' or post.extension == '.png' or post.extension == '.gif' or post.extension == '.webp' %}
-        <img src="{{ post.file.url }}" alt="" class="image-post" title="Click to downlaod">
+        <img data-src="{{ post.file.url }}" alt="" class="image-post lazy" title="Click to download">
         {% elif post.extension == '.mp4' or post.extension == '.mov' or post.extension == '.avi' or post.extension == '.wmv' or post.extension == '.webm' %}
-        <video src="{{ post.file.url }}" class="video-post" preload="metadata" muted controls></video>
+        <video data-src="{{ post.file.url }}" class="video-post lazy" muted controls></video>
         {% else %}
         <div class="other-post link-primary">
           <h3>{{ post.file|cut:"Files/" }}</h3>
