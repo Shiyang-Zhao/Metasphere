@@ -83,6 +83,18 @@ friendsLink.addEventListener('click', () => {
     leftColumn.classList.toggle('fade-out');
 })
 
-function goToProfile(element) {
-    window.location.href = element.querySelector("a").getAttribute("href");
-}
+const friendItems = document.querySelectorAll('.friend-item');
+friendItems.forEach(function (frienditem) {
+    frienditem.addEventListener('click', function (event) {
+        event.preventDefault();
+        window.location.href = frienditem.querySelector('.friend-title').getAttribute('href');
+    });
+});
+
+const chatRoomItems = document.querySelectorAll('.chat-room-item');
+chatRoomItems.forEach(function (chatRoomitem) {
+    chatRoomitem.addEventListener('click', function (event) {
+        event.preventDefault();
+        window.location.href = chatRoomitem.querySelector('.chat-room-title').getAttribute('href');
+    });
+});

@@ -45,3 +45,11 @@ function toggleCheckbox(checkboxId) {
     var checkbox = document.getElementById(checkboxId);
     checkbox.checked = !checkbox.checked;
 }
+
+const chatRoomItems = document.querySelectorAll('.chat-room-item');
+chatRoomItems.forEach(function (chatRoomitem) {
+    chatRoomitem.addEventListener('click', function (event) {
+        event.preventDefault();
+        window.location.href = chatRoomitem.querySelector('.chat-room-title').getAttribute('href');
+    });
+});

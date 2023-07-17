@@ -4,7 +4,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'profile.css' %}">
 <div class="content-section">
-  <div class="media">
+  <div class="media d-flex align-items-center">
     <img class="img-thumbnail img-fluid shadow rounded-circle account-img" src="{{ user.profile.image.url }}">
     <div class="media-body">
       <h2 class="account-heading">{{ user.username }}</h2>
@@ -14,16 +14,24 @@
 
   {% if request.user == user %}
   <!-- Form section for updating profile -->
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <fieldset class="form-group">
-      {{ u_form|crispy }}
-      {{ p_form|crispy }}
-    </fieldset>
-    <div class="form-group">
-      <button class="btn btn-outline-info" type="submit">Update</button>
+  <div id="overlay" class="overlay">
+    <div class="profile-update-form fade-out">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          {{ u_form|crispy }}
+          {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
+
+  <button class="btn btn-primary edit-profile-btn">Edit</button>
+
+
   {% else %}
   <!-- Button section for non-owners -->
   <div class="button-section">
@@ -45,26 +53,27 @@
   <div class="user-posts">
     <div class="posts-container">
       {% for post in user.post_set.all %}
-      <article class="user-post mx-1 my-1">
+      <article class="user-post mx-1 my-1" data-url="{% url 'post-detail' post.pk %}">
         {% if post.file %}
         {% if post.extension == '.jpg' or post.extension == '.jpeg' or post.extension == '.png' or post.extension == '.gif' or post.extension == '.webp' %}
         <img src="{{ post.file.url }}" alt="" class="image-post" title="Click to downlaod">
         {% elif post.extension == '.mp4' or post.extension == '.mov' or post.extension == '.avi' or post.extension == '.wmv' or post.extension == '.webm' %}
-        <video src="{{ post.file.url }}" class="video-post" preload="auto" muted></video>
+        <video src="{{ post.file.url }}" class="video-post" preload="metadata" muted controls></video>
         {% else %}
-        <h2 class="unknown-post">{{ post.file|cut:"Files/" }}</h2>
+        <div class="other-post link-primary">
+          <h3>{{ post.file|cut:"Files/" }}</h3>
+        </div>
         {% endif %}
         {% else %}
         <div class="text-post">
-          <h2>{{ post.title }}</h2>
+          <h3>{{ post.title }}</h3>
           <p>{{ post.content }}</p>
         </div>
         {% endif %}
       </article>
       {% endfor %}
     </div>
-
   </div>
-
 </div>
+<script src="{% static 'profile.js' %}"></script>
 {% endblock content %}

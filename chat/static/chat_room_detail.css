@@ -25,6 +25,10 @@
     transition: all 0.3s ease;
 }
 
+.middle-column {
+    width: 270px;
+}
+
 .left-column h5,
 .middle-column h5 {
     margin-top: 10px;

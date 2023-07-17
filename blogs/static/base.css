@@ -61,6 +61,8 @@ video {
 
 .container {
   opacity: 0.95;
+  margin-top: 50px;
+  transform-origin: top;
   transform: scale(0.85);
   transition: all 0.3s ease;
 }

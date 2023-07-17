@@ -19,25 +19,28 @@
         </div>
       </div>
       <hr>
-      <h2>{{ post.title }}</h2>
-      <div class="d-flex justify-content-between align-items-center">
-        <p class="article-content">{{ post.content }}</p>
-        <div class="form-group mt-0 pt-0 d-flex justify-content-end">
-          {% if post.author == user %}
+      <div>
+        <h2 class="article-title">{{ post.title }}</h2>
+        <div>
+          <p class="article-content">{{ post.content }}</p>
           <div class="form-group mt-0 pt-0 d-flex justify-content-end">
-            <a class="btn btn-danger btn-sm mt-1 mb-1 flex-last delete-button"
-              href="{% url 'post-delete' post.pk %}">Delete</a>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1 flex-last update-button"
-              href="{% url 'post-update' post.pk %}">Update</a>
+            {% if post.author == user %}
+            <div class="form-group mt-0 pt-0 d-flex justify-content-end">
+              <a class="btn btn-danger btn-sm mt-1 mb-1 flex-last delete-button"
+                href="{% url 'post-delete' post.pk %}">Delete</a>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1 flex-last update-button"
+                href="{% url 'post-update' post.pk %}">Update</a>
+            </div>
+            {% endif %}
+            {% if post.file %}
+            <a href="{{ post.file.url }}" download class="btn btn-primary flex-last download-button" type="submit">
+              <i class="fas fa-download"></i> Downlaod
+            </a>
+            {% endif %}
           </div>
-          {% endif %}
-          {% if post.file %}
-          <a href="{{ post.file.url }}" download class="btn btn-primary flex-last download-button" type="submit">
-            <i class="fas fa-download"></i> Downlaod
-          </a>
-          {% endif %}
         </div>
       </div>
+
 
       <hr>
       <div>

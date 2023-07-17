@@ -1,5 +1,5 @@
 .content-container {
-    margin-top: -50px;
+    margin-top: -30px;
 }
 
 h2 {
@@ -11,15 +11,12 @@ h2 {
 }
 
 .article-title {
-    color: #444444;
+    color: #000000;
+    word-wrap: break-word;
 }
 
 .article-title:hover {
     color: #428bca;
-}
-
-.article-content {
-    white-space: pre-line;
 }
 
 .article-img {

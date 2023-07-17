@@ -8,15 +8,13 @@
         <h5>Following</h5>
         <ul class="friend-list">
             {% for friend in request.user.profile.following.all %}
-            <li class="friend-item" onclick="goToProfile(this)">
-                <div class="friend-title">
-                    <label for="{{ friend.user.pk }}">
-                        <a class="d-flex align-items-center" href="{% url 'profile' friend.user.username %}">
-                            <img src="{{ friend.image.url }}" class="friend-img">
-                            <text class="text-dark">{{ friend.user.username }}</text>
-                        </a>
-                    </label>
-                </div>
+            <li class="friend-item">
+                <label class="d-flex align-items-center" for="{{ friend.user.pk }}">
+                    <a class="friend-title d-flex align-items-center" href="{% url 'profile' friend.user.username %}">
+                        <img src="{{ friend.image.url }}" class="friend-img">
+                        <text class="text-dark">{{ friend.user.username }}</text>
+                    </a>
+                </label>
             </li>
             {% endfor %}
         </ul>
